@@ -75,6 +75,7 @@
         <piepagina></piepagina>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/select.js')}}"></script>
 </body>
 
 </html>

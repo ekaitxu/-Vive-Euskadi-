@@ -4484,12 +4484,6 @@ function queueJob(job) {
     queue.push(job);
   queueFlush();
 }
-function dequeueJob(job) {
-  const index = queue.indexOf(job);
-  if (index !== -1) {
-    queue.splice(index, 1);
-  }
-}
 function queueFlush() {
   if (!flushing && !flushPending) {
     flushPending = true;
@@ -5083,7 +5077,6 @@ var directiveOrder = [
   "init",
   "for",
   "model",
-  "modelable",
   "transition",
   "show",
   "if",
@@ -5272,10 +5265,7 @@ function setStylesFromObject(el, value) {
   let previousStyles = {};
   Object.entries(value).forEach(([key, value2]) => {
     previousStyles[key] = el.style[key];
-    if (!key.startsWith("--")) {
-      key = kebabCase(key);
-    }
-    el.style.setProperty(key, value2);
+    el.style.setProperty(kebabCase(key), value2);
   });
   setTimeout(() => {
     if (el.style.length === 0) {
@@ -5864,7 +5854,7 @@ var Alpine = {
   get raw() {
     return raw;
   },
-  version: "3.9.0",
+  version: "3.8.1",
   flushAndStopDeferringMutations,
   disableEffectScheduling,
   setReactivityEngine,
@@ -5988,31 +5978,6 @@ magic("id", (el) => (name, key = null) => {
 
 // packages/alpinejs/src/magics/$el.js
 magic("el", (el) => el);
-
-// packages/alpinejs/src/directives/x-modelable.js
-directive("modelable", (el, {expression}, {effect: effect3, evaluate: evaluate2, evaluateLater: evaluateLater2}) => {
-  let func = evaluateLater2(expression);
-  let innerGet = () => {
-    let result;
-    func((i) => result = i);
-    return result;
-  };
-  let evaluateInnerSet = evaluateLater2(`${expression} = __placeholder`);
-  let innerSet = (val) => evaluateInnerSet(() => {
-  }, {scope: {__placeholder: val}});
-  let initialValue = innerGet();
-  if (el._x_modelable_hook)
-    initialValue = el._x_modelable_hook(initialValue);
-  innerSet(initialValue);
-  queueMicrotask(() => {
-    if (!el._x_model)
-      return;
-    let outerGet = el._x_model.get;
-    let outerSet = el._x_model.set;
-    effect3(() => innerSet(outerGet()));
-    effect3(() => outerSet(innerGet()));
-  });
-});
 
 // packages/alpinejs/src/directives/x-teleport.js
 directive("teleport", (el, {expression}, {cleanup}) => {
@@ -6487,9 +6452,6 @@ function loop(el, iteratorNames, evaluateItems, evaluateKey) {
     }
     for (let i = 0; i < removes.length; i++) {
       let key = removes[i];
-      if (!!lookup[key]._x_effects) {
-        lookup[key]._x_effects.forEach(dequeueJob);
-      }
       lookup[key].remove();
       lookup[key] = null;
       delete lookup[key];
@@ -6606,11 +6568,6 @@ directive("if", (el, {expression}, {effect: effect3, cleanup}) => {
     });
     el._x_currentIfEl = clone2;
     el._x_undoIf = () => {
-      walk(clone2, (node) => {
-        if (!!node._x_effects) {
-          node._x_effects.forEach(dequeueJob);
-        }
-      });
       clone2.remove();
       delete el._x_currentIfEl;
     };
@@ -44888,7 +44845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ plugin)
 /* harmony export */ });
 /* module decorator */ module = __webpack_require__.hmd(module);
-function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function plugin(e,n){if(!e.vueAxiosInstalled){var o=isAxiosLike(n)?migrateToMultipleInstances(n):n;if(isValidConfig(o)){var t=getVueVersion(e);if(t){var i=t<3?registerOnVue2:registerOnVue3;Object.keys(o).forEach((function(n){i(e,n,o[n])})),e.vueAxiosInstalled=!0}else console.error("[vue-axios] unknown Vue version")}else console.error("[vue-axios] configuration is invalid, expected options are either <axios_instance> or { <registration_key>: <axios_instance> }")}}function registerOnVue2(e,n,o){Object.defineProperty(e.prototype,n,{get:function(){return o}}),e[n]=o}function registerOnVue3(e,n,o){e.config.globalProperties[n]=o,e[n]=o}function isAxiosLike(e){return e&&"function"==typeof e.get&&"function"==typeof e.post}function migrateToMultipleInstances(e){return{axios:e,$http:e}}function isValidConfig(e){return"object"===_typeof(e)&&Object.keys(e).every((function(n){return isAxiosLike(e[n])}))}function getVueVersion(e){return e&&e.version&&Number(e.version.split(".")[0])}"object"==("undefined"==typeof exports?"undefined":_typeof(exports))?module.exports=plugin:"function"==typeof define&&__webpack_require__.amdO?define([],(function(){return plugin})):window.Vue&&window.axios&&window.Vue.use&&Vue.use(plugin,window.axios);
+function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function plugin(e,n){if(!plugin.installed){var o=isAxiosLike(n)?migrateToMultipleInstances(n):n;if(isValidConfig(o)){plugin.installed=!0;var i=getVueVersion(e);if(i){var t=i<3?registerOnVue2:registerOnVue3;Object.keys(o).forEach((function(n){t(e,n,o[n])}))}else console.error("[vue-axios] unknown Vue version")}else console.error("[vue-axios] configuration is invalid, expected options are either <axios_instance> or { <registration_key>: <axios_instance> }")}}function registerOnVue2(e,n,o){Object.defineProperty(e.prototype,n,{get:function(){return o}}),e[n]=o}function registerOnVue3(e,n,o){e.config.globalProperties[n]=o,e[n]=o}function isAxiosLike(e){return e&&"function"==typeof e.get&&"function"==typeof e.post}function migrateToMultipleInstances(e){return{axios:e,$http:e}}function isValidConfig(e){return"object"===_typeof(e)&&Object.keys(e).every((function(n){return isAxiosLike(e[n])}))}function getVueVersion(e){return e&&e.version&&Number(e.version.split(".")[0])}"object"==("undefined"==typeof exports?"undefined":_typeof(exports))?module.exports=plugin:"function"==typeof define&&__webpack_require__.amdO?define([],(function(){return plugin})):window.Vue&&window.axios&&window.Vue.use&&Vue.use(plugin,window.axios);
 
 /***/ }),
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComentariosController;
+use App\Http\Controllers\PlanificacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,9 @@ Route::resource('descubre-euskadi', DescubreEuskadiController::class)->only('ind
 Route::get('/busqueda/{id}/plan/{nombre}', [PlanesController::class, 'plan'])->name('plan');
 
 Route::get('/user/datosUsuario/{id}', [UserController::class, 'datosUsuario'])->name('user.miPerfil');
-Route::get('/user/planesUsuario', [UserController::class, 'planesUsuario']);
+Route::get('/user/datosUsuario', [UserController::class, 'datosUsuario']);
+Route::get('/user/planesUsuario', [PlanificacionController::class, 'index'])->name('user.planesUsuario');
+Route::get('/user/planesUsuario/{id}', [PlanificacionController::class, 'show']);
 Route::get('/user/planesFavUsuario', [UserController::class, 'planesFavUsuario']);
 Route::get('/user/comentariosUsuario', [UserController::class, 'comentariosUsuario'])->name('user.comentariosUsuario');
 Route::resource('user', UserController::class);
