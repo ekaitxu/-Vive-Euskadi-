@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                 <img src="/images/login.jpg"/>
             </div>
             
@@ -16,7 +16,6 @@
                     <x-slot name="logo">
                         <a href="/">
                             <img src="/images/login1.png" width=100em height=100em/>
-                            <!--<x-application-logo class="w-20 h-20 fill-current text-gray-500" />-->
                         </a>
                     </x-slot>
                     <!-- Session Status -->
