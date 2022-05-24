@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Comentarios;
-use Illuminate\Support\Facades\Auth;
+use GrahamCampbell\ResultType\Result;
+use Illuminate\Http\Request;
 
 class ComentariosController extends Controller
 {
     public function mostrarComentarios($documentName)
     {
         // $result = DB::select('select * from comentarios where DocumentName = ?', [$documentName]);
-        $result = Comentarios::where('id', Auth::user()->id);
+        $result = DB::select('SELECT c.idComentario, c.DocumentName, c.Texto, c.Fecha, u.name FROM comentarios c, users u WHERE DocumentName = ? AND u.id = c.id ORDER BY Fecha DESC', [$documentName]);
         return $result;
         
     }
