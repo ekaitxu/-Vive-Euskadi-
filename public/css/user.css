@@ -32,7 +32,16 @@ body {
 #datosAdmin {
     position: absolute;
     font-style: normal;
-    top: 15%;
+    top: 10%;
+}
+
+.image-upload{
+text-align: center;
+
+}
+
+.image-upload>input {
+    display: none;
 }
 
 #menuAdmin {
@@ -52,60 +61,13 @@ body {
     color: black;
 }
 
-.descubre-img {
-    width: 200px;
-    height: 200px;
-}
-
-#logOut {
-    border-radius: 10px;
-    background-color: #ffffff;
-    width: 150px;
-    height: 40px;
-    font-size: 1.3em;
-}
-
-#logOut:hover {
-    background-color: #1498C2;
-    font-weight: 700;
-}
-
-/*Titulo de cada vista de usuario*/
 #titApartado {
     background-color: #1498C2;
     width: 400px;
     height: 50px;
 }
 
-/*Datos de usuario*/
-#datosUsuario {
-    background-color: #EEDDCD;
-    margin: 5% 10% 0 10%;
-}
 
-input {
-    border: solid;
-    border-radius: 10px;
-    background-color: transparent;
-}
-
-form>* {
-    margin: 1%;
-    text-align: center;
-}
-
-#botonForm {
-    width: 25%;
-    margin-bottom: 2%;
-    margin-top: 2%;
-    border-radius: 10px;
-}
-
-hr {
-    height: 5%;
-}
-
-/*Datos de usuario Fin*/
 
 /*Plan favorito de usuario*/
 
@@ -127,14 +89,13 @@ h1 {
     font-family: Astral Sisters;
 }
 
-/* .card {
+.planes {
     background-color: rgba(0, 0, 0, 0.5) !important;
     font-family: PlayfairDisplay;
     margin-bottom: 5%;
-} */
+}
 
 /*Plan favorito de usuario Fin*/
-
 
 /*Gestión de comentarios en Usuario */
 table {

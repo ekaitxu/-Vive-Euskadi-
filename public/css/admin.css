@@ -173,4 +173,13 @@ body {
     display: none;
 }
 
+.image-upload{
+    text-align: center;
+    
+}
+    
+.image-upload>input {
+    display: none;
+}
+
 
