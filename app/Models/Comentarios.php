@@ -14,6 +14,8 @@ class Comentarios extends Model
 
     protected $table = 'comentarios';
 
+    protected $primaryKey = 'IdComentario';
+
     public $timestamps = false;
     /**
      * The attributes that are mass assignable.

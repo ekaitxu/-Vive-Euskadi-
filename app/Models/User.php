@@ -11,6 +11,24 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
+    static $rules = [
+		'name' => 'required',
+		'email' => 'required',
+		'admin' => 'required',
+        'password' => 'required|confirmed|min:6'
+    ];
+
+    static $messages = [
+        'required' => 'El campo :attribute es obligatorio',
+        'confirmed' => 'El campo :attribute no coincide.',
+        'same' => 'El campo :attribute y :other deben ser iguales'
+    ];
+
+    static $customAttributes = [
+        'name' => 'nombre'
+    ];
+    
     use HasApiTokens, HasFactory, Notifiable;
     public $table = "users";
     /**
@@ -21,7 +39,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'admin',
         'password',
+        'foto',
     ];
 
     /**

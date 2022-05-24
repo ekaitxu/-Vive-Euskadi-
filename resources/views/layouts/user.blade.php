@@ -15,7 +15,7 @@
         {{-- Cabecera --}}
         @if (Route::has('login') && Route::has('register'))
         @auth
-        <cabecera descubre-euskadi="{{ url('descubre-euskadi')}}" index-route="{{ url('/home')}}" user-route="{{url('user/datosUsuario')}}" user-name="<?php echo Auth::user()->name; ?>" log-out="{{route('logout')}}" user-Admin="<?php echo Auth::user()->admin ?>" admin-route="{{url('admin/gestion-usuarios')}}"></cabecera>
+        <cabecera descubre-euskadi="{{ url('descubre-euskadi')}}" index-route="{{ url('/home')}}" user-route="{{ route('user.miPerfil', Auth::user()->id) }}" user-name="<?php echo Auth::user()->name; ?>" log-out="{{route('logout')}}" user-Admin="<?php echo Auth::user()->admin ?>" admin-route="{{url('admin/gestion-usuarios')}}"></cabecera>
         @else
         <cabecera descubre-euskadi="{{ url('descubre-euskadi')}}" index-route="{{ url('/home')}}" user-login="{{ route('login') }}" user-register="{{ route('register') }}"></cabecera>
         @endauth
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div id="btnMenuUser" class="mt-5">
-                                <a href="{{url('/user/datosUsuario')}}" class=" btn text-truncate">
+                                <a href="{{ route('user.miPerfil', Auth::user()->id) }}" class=" btn text-truncate">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                     </svg>

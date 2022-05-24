@@ -1,11 +1,22 @@
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url('/fonts/PlayfairDisplay-Regular.ttf');
+}
+:root {
+    --timing-function: cubic-bezier(0.82, 0.2, 0.42, 1);
+  }
 body {
     background-image: url(../images/bodyAdmin.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    font-family: PlayfairDisplay;
 }
 
+#cuerpo{
+    margin: 4% 0 0 6%;
+}
 #barraLateral {
     background-color: #e1ecf0ff;
     height: fit-content;
@@ -19,10 +30,15 @@ body {
     width: 25%;
 }
 
+
 #datosAdmin {
     position: absolute;
-    font-style: normal;
+    font-weight: 900;
     top: 15%;
+}
+
+#datosAdmin h5 {
+    font-size: 1.5em;
 }
 
 #contDatos {
@@ -33,20 +49,65 @@ body {
 }
 
 #btnMenuAdmin {
-    height: 500px;
+    height: 350px;
+    display: flex;
+    align-items: center;
 }
 
 #btnMenuAdmin a {
-    color: black;
-    font-size: 1.4em;
-    text-decoration: none;
-    margin-left: 3%;
+ position: relative;
+  overflow: hidden; 
+  transition: color 0s 0.25s var(--timing-function);
+}
+
+#btnMenuAdmin a::before, #btnMenuAdmin a::after  {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+#btnMenuAdmin a::before{
+  content: '';
+  top: 50%;
+  transform: translate(-101%, -50%);
+  height: 80%;
+  z-index: 1;
+  display: flex;
+  background: #1498C2;
+  transition: transform 0.5s var(--timing-function);
+}
+
+#btnMenuAdmin a::after{
+  content: attr(data-icon);
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 2.6em;
+  top: 0;
+  display: flex;
+  margin-left: 15%;
+  height: 100%;
+  color: #1498C2;
+  opacity: 0;
+  transition: opacity 0s 0.25s var(--timing-function);
 }
 
 #btnMenuAdmin a:hover {
-    background-color: gray;
-    color: black;
+    color: transparent;
+  }
+  
+  #btnMenuAdmin a:hover::before {
+    transform: translate(101%, -50%);
+  }
+  
+  #btnMenuAdmin a:hover::after {
+    opacity: 1;
+  }
+  
+#btnMenuAdmin span{
+    font-size: 1.6em;
 }
+
+
 
 #titApartado {
     background-color: #1498C2;
@@ -54,16 +115,30 @@ body {
     height: 50px;
 }
 
-.table {
-    margin: 5% 20% 0 15%;
-    width: 30%;
+#myTable {
+    width: 80%;
+    text-align: center; 
     background-color: #e1ecf0ff;
+    border: 3px solid black;
 }
-
-.pagination {
+#tablaContenido{
     margin-top: 5%;
-    margin-left: 40%;
-    /* justify-content: center; */
+}
+#btnCrear{
+    margin-bottom: 2%;
+    margin-right: 115px;
+    background: #e1ecf0ff;
+    color: black;
+    border: 3px solid black;
+}
+#btnCrear:hover{
+    background: rgb(153, 212, 233);
+}
+.pagination {
+    margin-top: 2%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
 }
 
 .page-link {
@@ -71,20 +146,31 @@ body {
 }
 
 .page-item.active .page-link {
-    background-color: #1498C2 !important;
+    background-color: #67bed8 !important;
     color: rgb(0, 0, 0) !important;
     border-color: transparent !important;
 }
 
-#logOut {
-    border-radius: 10px;
-    background-color: #ffffff;
-    width: 150px;
-    height: 40px;
-    font-size: 1.3em;
+#contBtnNuevo {
+    display: flex;
+    align-items: flex-end;
 }
 
-#logOut:hover {
-    background-color: #1498C2;
-    font-weight: 700;
+
+#contNewUser {
+    background-color: #E1ECF0;
+    padding: 2%;
+    width: 50%;
 }
+
+#imgUser{
+    border-radius:80%;
+    height: 120px;
+    width: 120px;
+}
+
+#fotoUsuario {
+    display: none;
+}
+
+

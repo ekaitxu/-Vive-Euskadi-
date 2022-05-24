@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Favoritos;
 use App\Models\Comentarios;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -20,9 +21,10 @@ class UserController extends Controller
         return view('layouts.user');
     }
     //Estas funciones hacen redirecciones a las pestañas diferentes 
-    public function datosUsuario()
+    public function datosUsuario($id)
     {
-        return view('user.datosUsuario');
+        $user = User::find($id);
+        return view('user.datosUsuario', compact('user'));
     }
 
     public function planesUsuario()
