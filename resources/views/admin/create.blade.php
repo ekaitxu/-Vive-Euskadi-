@@ -16,28 +16,14 @@
    <section id="contNewUser">
       <form method="POST" action="{{ route('admin.store') }}"  role="form" enctype="multipart/form-data">
          @csrf
+         
+         <div class="image-upload">
+            <label for="file-input">
+                <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+            </label>
 
-        {{--  <div class="d-flex justify-content-center">
-             <img src="/images/Imagenes/bodyDescubre.jpg" class="img-fluid circular--square" alt="" id="imgUser">
-         </div> --}}
-
-
-
-
-          <div class="drag-drop">
-             @if($user->foto)
-                 <img src="/images/Imagenes/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
-             @endif
-         </div>
-         <div>
-             <input name="foto" type="file"/>
-             {{-- <span class="fa-stack fa-2x">
-                 <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
-                 <i class="fa fa-circle fa-stack-1x top medium"></i>
-                 <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
-             </span> --}}
-             <span class="desc">Pulse aquí para añadir una foto</span>
-         </div>
+            <input id="file-input" type="file" />
+        </div>
 
          <div class="mb-3">
           <label for="name">Nombre: </label>  

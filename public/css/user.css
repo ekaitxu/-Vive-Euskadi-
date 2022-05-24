@@ -32,7 +32,16 @@ body {
 #datosAdmin {
     position: absolute;
     font-style: normal;
-    top: 15%;
+    top: 10%;
+}
+
+.image-upload{
+text-align: center;
+
+}
+
+.image-upload>input {
+    display: none;
 }
 
 #menuAdmin {
@@ -56,4 +65,40 @@ body {
     background-color: #1498C2;
     width: 400px;
     height: 50px;
+}
+
+
+
+/*Plan favorito de usuario*/
+
+#planFavUser {
+    text-align: center;
+    margin: 5%;
+}
+
+.card-text {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url('/fonts/PlayfairDisplay-Regular.ttf');
+}
+
+h1 {
+    font-family: Astral Sisters;
+}
+
+.planes {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    font-family: PlayfairDisplay;
+    margin-bottom: 5%;
+}
+
+/*Plan favorito de usuario Fin*/
+
+/*Gestión de comentarios en Usuario */
+table {
+    margin: 5% 20% 0 20%;
+    background-color: #e1ecf0ff;
 }

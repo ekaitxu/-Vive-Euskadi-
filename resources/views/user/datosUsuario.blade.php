@@ -27,20 +27,19 @@
                     {{ method_field('PATCH') }}
                     @csrf
 
-                    <div class="drag-drop">
+                <div class="image-upload">
+                    <label for="file-input">
                         @if($user->foto)
                             <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
+                        @else
+                            <img src="../../images/login1.png"style="width: 100px; height: 100px;"/>
                         @endif
-                    </div>
-                    <div class="mb-3">
-                        <input name="foto" type="file"/>
-                        {{-- <span class="fa-stack fa-2x">
-                            <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
-                            <i class="fa fa-circle fa-stack-1x top medium"></i>
-                            <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
-                        </span> --}}
-                        <span class="desc">Pulse aquí para añadir una foto</span>
-                    </div>
+                        
+                    </label>
+
+                    <input id="file-input" type="file" name="foto" />
+                </div>
+
                     <div class="mb-3">
                      <label for="nombre">Nombre: </label>  
                      <input id="nombre" type="text" name="name" class="form-control" value={{ $user->name }}>                    

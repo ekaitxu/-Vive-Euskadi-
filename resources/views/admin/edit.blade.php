@@ -18,27 +18,18 @@
                    <form method="POST" action="{{ route('admin.update', $user->id) }}"  role="form" enctype="multipart/form-data">
                     {{ method_field('PATCH') }}
                     @csrf
+                    
+                    <div class="image-upload">
+                        <label for="file-input">
+                            @if($user->foto)
+                                <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
+                            @else
+                                <img src="../../images/login1.png"style="width: 100px; height: 100px;"/>
+                            @endif
+                            
+                        </label>
 
-                   {{--  <div class="d-flex justify-content-center">
-                        <img src="/images/Imagenes/bodyDescubre.jpg" class="img-fluid circular--square" alt="" id="imgUser">
-                    </div> --}}
-
-
-
-
-                     <div class="drag-drop">
-                        @if($user->foto)
-                            <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
-                        @endif
-                    </div>
-                    <div>
-                        <input name="foto" type="file"/>
-                        {{-- <span class="fa-stack fa-2x">
-                            <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
-                            <i class="fa fa-circle fa-stack-1x top medium"></i>
-                            <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
-                        </span> --}}
-                        <span class="desc">Pulse aquí para añadir una foto</span>
+                        <input id="file-input" type="file" name="foto" />
                     </div>
 
                     <div class="mb-3">
