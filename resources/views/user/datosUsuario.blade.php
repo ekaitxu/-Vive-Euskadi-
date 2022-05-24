@@ -23,7 +23,7 @@
                 <span class="card-title">Editar {{ $user->name }}</span>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('user.update', $user->id) }}">
+                <form method="POST" action="{{ route('user.update', $user->id) }}" role="form" enctype="multipart/form-data">
                     {{ method_field('PATCH') }}
                     @csrf
 
