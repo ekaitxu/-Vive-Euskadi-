@@ -149,6 +149,57 @@
         </tr>
       </tbody>
     </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de planificaciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="add-plan-form" class="p-2" novalidate>
+            <div class="row mb-3 gx-3">
+              <div class="col">
+                <p>Guardar en Planificacion:</p>
+                <select name="planificacion" id="planificacion">
+                  
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Nueva Planificacion
+            </button>
+            <div class="collapse" id="collapseExample">
+               <form id="add-planificacion-form" class="p-2" novalidate>
+                  <div class="row mb-3 gx-3">
+                    <div class="col">
+                      <input type="text" name="nombre" class="form-control form-control-lg" id="nombrePlanificacion" placeholder="Nombre Planificacion" required>
+                      <div class="invalid-feedback">El nombre es obligatorio</div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <textarea class="form-control" placeholder="Descripcion" id="descripcionPlanificacion" rows="3"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <button class="btn btn-primary" id="crearPlanificacion" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Crear
+                    </button>
+                  </div>
+               </form>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarDatos">Guardar en lista</button>
+      </div>
+    </div>
+  </div>
+</div>
     <div
       class="
         row row-cols-1 row-cols-md-2 row-cols-lg-3
@@ -159,6 +210,7 @@
       "
       :id="this.userId"
     >
+     
       <div
         v-for="(item, index) in paginated('resultado')"
         :key="index"
@@ -170,9 +222,12 @@
                 <img src="/images/Imagenes/alavaDescubre.jpg" class="card-img" alt="">
                 <div class="card-img-overlay">
                     <h5 class="card-title float-end h5-DocumentName"  v-bind:id="item.documentName" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-heart"   viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-heart iconoFavPlan"   viewBox="0 0 16 16">
                             <path  d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                         </svg>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark pe-1 pt-1 iconoGuardarPlan" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                          </svg>
                     </h5>
                     <p  class="card-text position-absolute start-0 bottom-0 end-0 h-25 text-center fs-5" >{{item.documentName}}</p>
                 </div>
@@ -203,9 +258,37 @@
 <script>
 import $ from "jquery";
 
-$(document).ready(function () {
-  rellenarFavoritos();
 
+
+export default {
+  data() {
+    return {
+      planes: null,
+      resultado: [],
+      filtro: null,
+      id: null,
+      user_id: null,
+      paginate: ["resultado"],
+      cantidadTotal: 0,
+    };
+  },
+  props: ['userId'],
+  mounted() {
+    var esto = this;
+    this.planes = JSON.parse(localStorage.getItem("planes"));
+    const url = window.location.href;
+    this.id = url.substring(url.lastIndexOf("/") + 1);
+    this.resultado = this.planes.filter((plan) =>
+      plan.documentName.toLowerCase().includes(decodeURI(this.id.toLowerCase()))
+    );
+    this.checkbox();
+    this.user_id=parseInt($('.divUserId').attr('id'));
+    
+$(document).ready(function () {
+  var documentName = $(this).parent().attr("id");
+  var svgPlan = null;
+  rellenarFavoritos();
+  rellenarGuardarPlan();
   //Animacion de las cards
   $(".busqueda-card").hover(
     function () {
@@ -225,7 +308,7 @@ $(document).ready(function () {
   );
   // Agregar o Borrar de Favoritos
   $(".h5-DocumentName")
-    .children("svg")
+    .children(".iconoFavPlan")
     .click(function () {
       if ($(".divUserId").attr("id") != undefined) {
         var user_id = parseInt($(".divUserId").attr("id"));
@@ -277,15 +360,107 @@ $(document).ready(function () {
           });
         }
       }
-
       return false;
     });
+    $(".h5-DocumentName")
+    .children(".iconoGuardarPlan")
+    .click(function () {
+      if ($(".divUserId").attr("id") != undefined) {
+        documentName = $(this).parent().attr("id");
+        rellenarSelectPlan(esto.user_id);
+        svgPlan = this;
+      }
+      return false;
+    });
+     $('#guardarDatos').click(function (e) { 
+       console.log($('#planificacion').val());
+          e.preventDefault();
+          $.ajax({
+                type: "get",
+                url:
+                  "/busqueda/insertarPlanPlanificacion/" +$('#planificacion').val()+"/"+documentName,
+                data: {},
+                error: function (ts) {
+                  console.log(ts.responseText);
+                },
+                success: function() {
+                  if ($(svgPlan).hasClass("bi-bookmark")) {
+                    $(svgPlan).removeClass("bi-bookmark");
+                    $(svgPlan).addClass("bi-bookmark-check-fill");
+                    $(svgPlan)
+                      .children("path")
+                      .attr(
+                        "d",
+                        "M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"
+                      );
+                    $(svgPlan).children("path").attr("fill-rule", "evenodd");
+                    $(svgPlan).css("fill", "#d850fc");
+                    
+                  }
+                  $('#add-plan-form').append("<p class='bg-success text-white' id='textoBien'>Se ha guardado el plan existosamente</p>");
+                  setTimeout(function() { $("#textoBien").remove(); }, 5000);
+                },
+              }); 
+
+        });
+        $('#crearPlanificacion').click(function (e) { 
+          e.preventDefault();
+          $.ajax({
+                type: "get",
+                url:
+                  "/busqueda/insertarPlanificacion/" +esto.user_id+"/"+$('#nombrePlanificacion').val()+"/"+$('#descripcionPlanificacion').val(),
+                data: {},
+                error: function (ts) {
+                  console.log(ts.responseText);
+                },
+                success: function() {
+                  rellenarSelectPlan(esto.user_id)
+                  $('#nombrePlanificacion').val('');
+                  $('#descripcionPlanificacion').val('');
+
+                },
+              }); 
+        });
   //Rellenar los favoritos del user al cambiar de pagina
   $(".page-link").click(function () {
     rellenarFavoritos();
+    rellenarGuardarPlan();
   });
 });
 //Rellenar los corazones segun los favoritos del user
+function rellenarGuardarPlan() {
+                if($('.divUserId').attr('id')!=undefined){
+                    var user_id=parseInt($('.divUserId').attr('id'));
+                    $.ajax({
+                                type: 'get',
+                                url: '/busqueda/selectPlanesPlanificacion/'+user_id,
+                                data: {},
+                                error: function(ts) { console.log(ts.responseText) }
+                            }).done(function(respuesta) {
+                                var resultadoDocumentName= [];
+                                for(var i=0; i<respuesta.length;i++){
+                                    resultadoDocumentName.push(respuesta[i].DocumentName);
+                                };
+                                $('.h5-DocumentName').each(function () { 
+                                    if(resultadoDocumentName.indexOf($(this).attr('id'))>=0){
+                                        $(this).children('.iconoGuardarPlan').removeClass("bi-bookmark");
+                                        $(this).children('.iconoGuardarPlan').addClass("bi-bookmark-check-fill");
+                                        $(this).children('.iconoGuardarPlan').children('path').attr('d', 'M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z');
+                                        $(this).children('.iconoGuardarPlan').children('path').attr('fill-rule','evenodd');
+                                        $(this).children('.iconoGuardarPlan').css('fill', '#d850fc');
+                                    }else{
+                                        $(this).children('.iconoGuardarPlan').removeClass("bi-bookmark-check-fill");
+                                        $(this).children('.iconoGuardarPlan').addClass("bi-bookmark");
+                                        $(this).children('.iconoGuardarPlan').children('path').attr('d', 'M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z');
+                                        $(this).children('.iconoGuardarPlan').children('path').removeAttr('fill-rule');
+                                        $(this).children('.iconoGuardarPlan').css('fill', 'white');
+                                    }
+                                });
+                            });
+                }else{
+                   $(".h5-DocumentName").remove();
+                };
+};
 function rellenarFavoritos() {
                 if($('.divUserId').attr('id')!=undefined){
                     var user_id=parseInt($('.divUserId').attr('id'));
@@ -301,43 +476,54 @@ function rellenarFavoritos() {
                                 };
                                 $('.h5-DocumentName').each(function () { 
                                     if(resultadoDocumentName.indexOf($(this).attr('id'))>=0){
-                                        $(this).children('svg').removeClass('bi-heart');
-                                        $(this).children('svg').addClass("bi-heart-fill");
-                                        $(this).children('svg').children('path').attr('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
-                                        $(this).children('svg').children('path').attr('fill-rule','evenodd');
-                                        $(this).children('svg').css('fill', 'red');
+                                        $(this).children('.iconoFavPlan').removeClass('bi-heart');
+                                        $(this).children('.iconoFavPlan').addClass("bi-heart-fill");
+                                        $(this).children('.iconoFavPlan').children('path').attr('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+                                        $(this).children('.iconoFavPlan').children('path').attr('fill-rule','evenodd');
+                                        $(this).children('.iconoFavPlan').css('fill', 'red');
                                     }else{
-                                        $(this).children('svg').removeClass('bi-heart-fill');
-                                        $(this).children('svg').addClass("bi-heart");
-                                        $(this).children('svg').children('path').attr('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
-                                        $(this).children('svg').children('path').removeAttr('fill-rule');
-                                        $(this).children('svg').css('fill', 'white');
+                                        $(this).children('.iconoFavPlan').removeClass('bi-heart-fill');
+                                        $(this).children('.iconoFavPlan').addClass("bi-heart");
+                                        $(this).children('.iconoFavPlan').children('path').attr('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
+                                        $(this).children('.iconoFavPlan').children('path').removeAttr('fill-rule');
+                                        $(this).children('.iconoFavPlan').css('fill', 'white');
                                     }
                                 });
                             });
+                }else{
+                   $(".h5-DocumentName").remove();
                 };
 };
+   
 
-export default {
-  data() {
-    return {
-      planes: null,
-      resultado: [],
-      filtro: null,
-      id: null,
-      paginate: ["resultado"],
-      cantidadTotal: 0,
+    function rellenarSelectPlan(user_id) {
+      $.ajax({
+            type: "get",
+            url:
+              "/busqueda/selectPlanificaciones/" +user_id,
+            data: {},
+            error: function (ts) {
+              console.log(ts.responseText);
+            },
+            success: function(data) {
+             var opciones='';
+              if(data.length >0){
+                for(var i=0;i<data.length;i++){
+                  opciones += "<option value='"+data[i].IdPlanificacion+"'>"+data[i].NombrePlanificacion+"</option>";
+                }
+              }else{
+                opciones += "<option value='none'>No hay planificaciones</option>";
+              }
+              $('#planificacion').html(opciones);
+              $('#planificacion').val($('#planificacion option:last').val());
+              
+
+            },
+          }); 
     };
-  },
-  props: ['userId'],
-  mounted() {
-    this.planes = JSON.parse(localStorage.getItem("planes"));
-    const url = window.location.href;
-    this.id = url.substring(url.lastIndexOf("/") + 1);
-    this.resultado = this.planes.filter((plan) =>
-      plan.documentName.toLowerCase().includes(decodeURI(this.id.toLowerCase()))
-    );
-    this.checkbox();
+    
+
+
   },
 
   methods: {
@@ -463,5 +649,9 @@ td {
 }
 .card-img {
   height: 15rem;
+}
+.modal-wrapper{
+  display: table-cell;
+  vertical-align: middle;
 }
 </style>

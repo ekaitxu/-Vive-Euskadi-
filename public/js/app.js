@@ -8997,115 +8997,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  rellenarFavoritos(); //Animacion de las cards
-
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".busqueda-card").hover(function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).stop().animate({
-      width: "25rem",
-      height: "20rem"
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children(".card-img").stop().animate({
-      width: "25rem",
-      height: "20rem"
-    });
-  }, function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).stop().animate({
-      width: "20rem",
-      height: "15rem"
-    });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children(".card-img").stop().animate({
-      width: "20rem",
-      height: "15rem"
-    });
-  }); // Agregar o Borrar de Favoritos
-
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".h5-DocumentName").children("svg").click(function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(".divUserId").attr("id") != undefined) {
-      var user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()(".divUserId").attr("id"));
-      var documentName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr("id");
-
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass("bi-heart")) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass("bi-heart");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("bi-heart-fill");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("fill-rule", "evenodd");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css("fill", "red");
-        var territory = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().attr("id");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-          type: "get",
-          url: "/busqueda/insertarFavoritos/" + user_id + "/" + documentName + "/" + territory,
-          data: {},
-          error: function error(ts) {
-            console.log(ts.responseText);
-          }
-        });
-      } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass("bi-heart-fill")) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass("bi-heart-fill");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("bi-heart");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").removeAttr("fill-rule");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css("fill", "white");
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-          type: "get",
-          url: "/busqueda/borrarFavoritos/" + user_id + "/" + documentName,
-          data: {},
-          error: function error(ts) {
-            console.log(ts.responseText);
-          }
-        });
-      }
-    }
-
-    return false;
-  }); //Rellenar los favoritos del user al cambiar de pagina
-
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".page-link").click(function () {
-    rellenarFavoritos();
-  });
-}); //Rellenar los corazones segun los favoritos del user
-
-function rellenarFavoritos() {
-  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id') != undefined) {
-    var user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id'));
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      type: 'get',
-      url: '/busqueda/selectFavoritos/' + user_id,
-      data: {},
-      error: function error(ts) {
-        console.log(ts.responseText);
-      }
-    }).done(function (respuesta) {
-      var resultadoDocumentName = [];
-
-      for (var i = 0; i < respuesta.length; i++) {
-        resultadoDocumentName.push(respuesta[i].DocumentName);
-      }
-
-      ;
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.h5-DocumentName').each(function () {
-        if (resultadoDocumentName.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id')) >= 0) {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').removeClass('bi-heart');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').addClass("bi-heart-fill");
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').children('path').attr('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').children('path').attr('fill-rule', 'evenodd');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').css('fill', 'red');
-        } else {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').removeClass('bi-heart-fill');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').addClass("bi-heart");
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').children('path').attr('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').children('path').removeAttr('fill-rule');
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('svg').css('fill', 'white');
-        }
-      });
-    });
-  }
-
-  ;
-}
-
-;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9113,6 +9060,7 @@ function rellenarFavoritos() {
       resultado: [],
       filtro: null,
       id: null,
+      user_id: null,
       paginate: ["resultado"],
       cantidadTotal: 0
     };
@@ -9121,6 +9069,7 @@ function rellenarFavoritos() {
   mounted: function mounted() {
     var _this = this;
 
+    var esto = this;
     this.planes = JSON.parse(localStorage.getItem("planes"));
     var url = window.location.href;
     this.id = url.substring(url.lastIndexOf("/") + 1);
@@ -9128,6 +9077,242 @@ function rellenarFavoritos() {
       return plan.documentName.toLowerCase().includes(decodeURI(_this.id.toLowerCase()));
     });
     this.checkbox();
+    this.user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id'));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+      var documentName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr("id");
+      var svgPlan = null;
+      rellenarFavoritos();
+      rellenarGuardarPlan(); //Animacion de las cards
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".busqueda-card").hover(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).stop().animate({
+          width: "25rem",
+          height: "20rem"
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children(".card-img").stop().animate({
+          width: "25rem",
+          height: "20rem"
+        });
+      }, function () {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).stop().animate({
+          width: "20rem",
+          height: "15rem"
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children(".card-img").stop().animate({
+          width: "20rem",
+          height: "15rem"
+        });
+      }); // Agregar o Borrar de Favoritos
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".h5-DocumentName").children(".iconoFavPlan").click(function () {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(".divUserId").attr("id") != undefined) {
+          var user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()(".divUserId").attr("id"));
+          var documentName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr("id");
+
+          if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass("bi-heart")) {
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass("bi-heart");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("bi-heart-fill");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("d", "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("fill-rule", "evenodd");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css("fill", "red");
+            var territory = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().parent().attr("id");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+              type: "get",
+              url: "/busqueda/insertarFavoritos/" + user_id + "/" + documentName + "/" + territory,
+              data: {},
+              error: function error(ts) {
+                console.log(ts.responseText);
+              }
+            });
+          } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).hasClass("bi-heart-fill")) {
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).removeClass("bi-heart-fill");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass("bi-heart");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children("path").removeAttr("fill-rule");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).css("fill", "white");
+            jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+              type: "get",
+              url: "/busqueda/borrarFavoritos/" + user_id + "/" + documentName,
+              data: {},
+              error: function error(ts) {
+                console.log(ts.responseText);
+              }
+            });
+          }
+        }
+
+        return false;
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".h5-DocumentName").children(".iconoGuardarPlan").click(function () {
+        if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(".divUserId").attr("id") != undefined) {
+          documentName = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parent().attr("id");
+          rellenarSelectPlan(esto.user_id);
+          svgPlan = this;
+        }
+
+        return false;
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#guardarDatos').click(function (e) {
+        console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#planificacion').val());
+        e.preventDefault();
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+          type: "get",
+          url: "/busqueda/insertarPlanPlanificacion/" + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#planificacion').val() + "/" + documentName,
+          data: {},
+          error: function error(ts) {
+            console.log(ts.responseText);
+          },
+          success: function success() {
+            if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).hasClass("bi-bookmark")) {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).removeClass("bi-bookmark");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).addClass("bi-bookmark-check-fill");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).children("path").attr("d", "M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).children("path").attr("fill-rule", "evenodd");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(svgPlan).css("fill", "#d850fc");
+            }
+
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-plan-form').append("<p class='bg-success text-white' id='textoBien'>Se ha guardado el plan existosamente</p>");
+            setTimeout(function () {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()("#textoBien").remove();
+            }, 5000);
+          }
+        });
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#crearPlanificacion').click(function (e) {
+        e.preventDefault();
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+          type: "get",
+          url: "/busqueda/insertarPlanificacion/" + esto.user_id + "/" + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#nombrePlanificacion').val() + "/" + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#descripcionPlanificacion').val(),
+          data: {},
+          error: function error(ts) {
+            console.log(ts.responseText);
+          },
+          success: function success() {
+            rellenarSelectPlan(esto.user_id);
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#nombrePlanificacion').val('');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#descripcionPlanificacion').val('');
+          }
+        });
+      }); //Rellenar los favoritos del user al cambiar de pagina
+
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(".page-link").click(function () {
+        rellenarFavoritos();
+        rellenarGuardarPlan();
+      });
+    }); //Rellenar los corazones segun los favoritos del user
+
+    function rellenarGuardarPlan() {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id') != undefined) {
+        var user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id'));
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+          type: 'get',
+          url: '/busqueda/selectPlanesPlanificacion/' + user_id,
+          data: {},
+          error: function error(ts) {
+            console.log(ts.responseText);
+          }
+        }).done(function (respuesta) {
+          var resultadoDocumentName = [];
+
+          for (var i = 0; i < respuesta.length; i++) {
+            resultadoDocumentName.push(respuesta[i].DocumentName);
+          }
+
+          ;
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.h5-DocumentName').each(function () {
+            if (resultadoDocumentName.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id')) >= 0) {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').removeClass("bi-bookmark");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').addClass("bi-bookmark-check-fill");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').children('path').attr('d', 'M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').children('path').attr('fill-rule', 'evenodd');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').css('fill', '#d850fc');
+            } else {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').removeClass("bi-bookmark-check-fill");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').addClass("bi-bookmark");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').children('path').attr('d', 'M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').children('path').removeAttr('fill-rule');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoGuardarPlan').css('fill', 'white');
+            }
+          });
+        });
+      } else {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".h5-DocumentName").remove();
+      }
+
+      ;
+    }
+
+    ;
+
+    function rellenarFavoritos() {
+      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id') != undefined) {
+        var user_id = parseInt(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.divUserId').attr('id'));
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+          type: 'get',
+          url: '/busqueda/selectFavoritos/' + user_id,
+          data: {},
+          error: function error(ts) {
+            console.log(ts.responseText);
+          }
+        }).done(function (respuesta) {
+          var resultadoDocumentName = [];
+
+          for (var i = 0; i < respuesta.length; i++) {
+            resultadoDocumentName.push(respuesta[i].DocumentName);
+          }
+
+          ;
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.h5-DocumentName').each(function () {
+            if (resultadoDocumentName.indexOf(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id')) >= 0) {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').removeClass('bi-heart');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').addClass("bi-heart-fill");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').children('path').attr('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').children('path').attr('fill-rule', 'evenodd');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').css('fill', 'red');
+            } else {
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').removeClass('bi-heart-fill');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').addClass("bi-heart");
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').children('path').attr('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').children('path').removeAttr('fill-rule');
+              jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('.iconoFavPlan').css('fill', 'white');
+            }
+          });
+        });
+      } else {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(".h5-DocumentName").remove();
+      }
+
+      ;
+    }
+
+    ;
+
+    function rellenarSelectPlan(user_id) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+        type: "get",
+        url: "/busqueda/selectPlanificaciones/" + user_id,
+        data: {},
+        error: function error(ts) {
+          console.log(ts.responseText);
+        },
+        success: function success(data) {
+          var opciones = '';
+
+          if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+              opciones += "<option value='" + data[i].IdPlanificacion + "'>" + data[i].NombrePlanificacion + "</option>";
+            }
+          } else {
+            opciones += "<option value='none'>No hay planificaciones</option>";
+          }
+
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#planificacion').html(opciones);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#planificacion').val(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#planificacion option:last').val());
+        }
+      });
+    }
+
+    ;
   },
   methods: {
     //Todos los filtrados
@@ -9604,7 +9789,7 @@ __webpack_require__.r(__webpack_exports__);
       return plan.documentName.includes(nombre);
     }); //Control de no haber iniciado sesion
 
-    if (this.userId != undefined && this.userId != NaN) {
+    if (this.userId != undefined && this.userId != NaN && this.userId != null) {
       //Marcar los favoritos del usuario
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: "get",
@@ -9632,6 +9817,36 @@ __webpack_require__.r(__webpack_exports__);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(".svgCorazon").children("path").attr("d", "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z");
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(".svgCorazon").children("path").removeAttr("fill-rule");
           jquery__WEBPACK_IMPORTED_MODULE_0___default()(".svgCorazon").css("fill", "white");
+        }
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+        type: 'get',
+        url: '/busqueda/selectPlanesPlanificacion/' + este.userId,
+        data: {},
+        error: function error(ts) {
+          console.log(ts.responseText);
+        }
+      }).done(function (respuesta) {
+        var resultadoDocumentName = [];
+
+        for (var i = 0; i < respuesta.length; i++) {
+          resultadoDocumentName.push(respuesta[i].DocumentName);
+        }
+
+        ;
+
+        if (resultadoDocumentName.indexOf(este.resultado[0].documentName) >= 0) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').removeClass("bi-bookmark");
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').addClass("bi-bookmark-check-fill");
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').children('path').attr('d', 'M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').children('path').attr('fill-rule', 'evenodd');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').css('fill', '#d850fc');
+        } else {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').removeClass("bi-bookmark-check-fill");
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').addClass("bi-bookmark");
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').children('path').attr('d', 'M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').children('path').removeAttr('fill-rule');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.svgBookmark').css('fill', 'white');
         }
       });
     } //Obtener los campos que cumple el plan
@@ -25840,7 +26055,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n@font-face {\r\n  font-family: Astral Sisters;\r\n  src: url(\"/fonts/Astral-Sisters.ttf\");\n}\n@font-face {\r\n  font-family: PlayfairDisplay;\r\n  src: url(\"/fonts/PlayfairDisplay.ttf\");\n}\ntable[data-v-517fb218] {\r\n  background-color: rgba(209, 220, 225, 0.9);\n}\nth[data-v-517fb218] {\r\n  font-family: \"Astral Sisters\";\r\n  font-size: 30px;\n}\ntd[data-v-517fb218] {\r\n  font-family: PlayFairDisplay;\n}\n.card-text[data-v-517fb218] {\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  font-family: PlayFairDisplay;\n}\n.card[data-v-517fb218] {\r\n  width: 20rem;\r\n  height: 15rem;\n}\n.card-img[data-v-517fb218] {\r\n  height: 15rem;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n@font-face {\r\n  font-family: Astral Sisters;\r\n  src: url(\"/fonts/Astral-Sisters.ttf\");\n}\n@font-face {\r\n  font-family: PlayfairDisplay;\r\n  src: url(\"/fonts/PlayfairDisplay.ttf\");\n}\ntable[data-v-517fb218] {\r\n  background-color: rgba(209, 220, 225, 0.9);\n}\nth[data-v-517fb218] {\r\n  font-family: \"Astral Sisters\";\r\n  font-size: 30px;\n}\ntd[data-v-517fb218] {\r\n  font-family: PlayFairDisplay;\n}\n.card-text[data-v-517fb218] {\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  font-family: PlayFairDisplay;\n}\n.card[data-v-517fb218] {\r\n  width: 20rem;\r\n  height: 15rem;\n}\n.card-img[data-v-517fb218] {\r\n  height: 15rem;\n}\n.modal-wrapper[data-v-517fb218]{\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45245,11 +45460,13 @@ var render = function () {
   return _c("div", { staticClass: "container-fluid" }, [
     _vm._m(0),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c(
       "div",
       {
         staticClass:
-          "\n      row row-cols-1 row-cols-md-2 row-cols-lg-3\n      g-4\n      mt-5\n      justify-content-center\n      divUserId\n    ",
+          "\n        row row-cols-1 row-cols-md-2 row-cols-lg-3\n        g-4\n        mt-5\n        justify-content-center\n        divUserId\n      ",
         attrs: { id: this.userId },
       },
       _vm._l(_vm.paginated("resultado"), function (item, index) {
@@ -45299,7 +45516,7 @@ var render = function () {
                         _c(
                           "svg",
                           {
-                            staticClass: "bi bi-heart",
+                            staticClass: "bi bi-heart iconoFavPlan",
                             attrs: {
                               xmlns: "http://www.w3.org/2000/svg",
                               width: "40",
@@ -45312,6 +45529,30 @@ var render = function () {
                             _c("path", {
                               attrs: {
                                 d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z",
+                              },
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "svg",
+                          {
+                            staticClass:
+                              "bi bi-bookmark pe-1 pt-1 iconoGuardarPlan",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "40",
+                              height: "40",
+                              fill: "currentColor",
+                              viewBox: "0 0 16 16",
+                              "data-bs-toggle": "modal",
+                              "data-bs-target": "#exampleModal",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d: "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z",
                               },
                             }),
                           ]
@@ -45413,7 +45654,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkGipuzcoa" },
                 },
-                [_vm._v("\n              Guipúzcoa\n            ")]
+                [_vm._v("\n                Guipúzcoa\n              ")]
               ),
             ]),
             _vm._v(" "),
@@ -45433,7 +45674,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkVizcaya" },
                 },
-                [_vm._v("\n              Vizcaya\n            ")]
+                [_vm._v("\n                Vizcaya\n              ")]
               ),
             ]),
           ]),
@@ -45451,7 +45692,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkPareja" },
                 },
-                [_vm._v("\n              Planes en pareja\n            ")]
+                [_vm._v("\n                Planes en pareja\n              ")]
               ),
             ]),
             _vm._v(" "),
@@ -45467,7 +45708,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkGrupo" },
                 },
-                [_vm._v("\n              Planes en grupo\n            ")]
+                [_vm._v("\n                Planes en grupo\n              ")]
               ),
             ]),
             _vm._v(" "),
@@ -45487,7 +45728,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkNiños" },
                 },
-                [_vm._v("\n              Planes con niños\n            ")]
+                [_vm._v("\n                Planes con niños\n              ")]
               ),
             ]),
           ]),
@@ -45509,7 +45750,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkCultura" },
                 },
-                [_vm._v("\n              Cultura\n            ")]
+                [_vm._v("\n                Cultura\n              ")]
               ),
             ]),
             _vm._v(" "),
@@ -45545,7 +45786,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkGastronomia" },
                 },
-                [_vm._v("\n              Gastronomía\n            ")]
+                [_vm._v("\n                Gastronomía\n              ")]
               ),
             ]),
           ]),
@@ -45567,7 +45808,11 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkAventura" },
                 },
-                [_vm._v("\n              Naturaleza y paisajes\n            ")]
+                [
+                  _vm._v(
+                    "\n                Naturaleza y paisajes\n              "
+                  ),
+                ]
               ),
             ]),
             _vm._v(" "),
@@ -45587,7 +45832,7 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkPequeAventura" },
                 },
-                [_vm._v("\n              Peque-Aventura\n            ")]
+                [_vm._v("\n                Peque-Aventura\n              ")]
               ),
             ]),
             _vm._v(" "),
@@ -45607,13 +45852,188 @@ var staticRenderFns = [
                   staticClass: "form-check-label",
                   attrs: { for: "checkUrbanos" },
                 },
-                [_vm._v("\n              Planes urbanos\n            ")]
+                [_vm._v("\n                Planes urbanos\n              ")]
               ),
             ]),
           ]),
         ]),
       ]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLabel" },
+                },
+                [_vm._v("Lista de planificaciones")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close",
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "p-2",
+                  attrs: { id: "add-plan-form", novalidate: "" },
+                },
+                [
+                  _c("div", { staticClass: "row mb-3 gx-3" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c("p", [_vm._v("Guardar en Planificacion:")]),
+                      _vm._v(" "),
+                      _c("select", {
+                        attrs: { name: "planificacion", id: "planificacion" },
+                      }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        type: "button",
+                        "data-bs-toggle": "collapse",
+                        "data-bs-target": "#collapseExample",
+                        "aria-expanded": "false",
+                        "aria-controls": "collapseExample",
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\n              Nueva Planificacion\n            "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "collapse",
+                      attrs: { id: "collapseExample" },
+                    },
+                    [
+                      _c(
+                        "form",
+                        {
+                          staticClass: "p-2",
+                          attrs: {
+                            id: "add-planificacion-form",
+                            novalidate: "",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "row mb-3 gx-3" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c("input", {
+                                staticClass: "form-control form-control-lg",
+                                attrs: {
+                                  type: "text",
+                                  name: "nombre",
+                                  id: "nombrePlanificacion",
+                                  placeholder: "Nombre Planificacion",
+                                  required: "",
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v("El nombre es obligatorio"),
+                              ]),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-3" }, [
+                            _c("textarea", {
+                              staticClass: "form-control",
+                              attrs: {
+                                placeholder: "Descripcion",
+                                id: "descripcionPlanificacion",
+                                rows: "3",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-3" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  id: "crearPlanificacion",
+                                  type: "button",
+                                  "data-bs-toggle": "collapse",
+                                  "data-bs-target": "#collapseExample",
+                                  "aria-expanded": "false",
+                                  "aria-controls": "collapseExample",
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                      Crear\n                    "
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-bs-dismiss": "modal" },
+                },
+                [_vm._v("Cerrar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", id: "guardarDatos" },
+                },
+                [_vm._v("Guardar en lista")]
+              ),
+            ]),
+          ]),
+        ]),
+      ]
+    )
   },
 ]
 render._withStripped = true
@@ -46132,55 +46552,60 @@ var render = function () {
                       ]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "container d-flex justify-content-end" },
-                      [
-                        _c(
-                          "svg",
+                    _vm.userId != undefined
+                      ? _c(
+                          "div",
                           {
-                            staticClass: "bi bi-heart pe-3 pt-1 svgCorazon",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "50",
-                              height: "50",
-                              fill: "white",
-                              viewBox: "0 0 16 16",
-                              id: "iconoFavPlan",
-                            },
+                            staticClass: "container d-flex justify-content-end",
                           },
                           [
-                            _c("path", {
-                              attrs: {
-                                d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z",
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bi bi-heart pe-3 pt-1 svgCorazon",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "50",
+                                  height: "50",
+                                  fill: "white",
+                                  viewBox: "0 0 16 16",
+                                  id: "iconoFavPlan",
+                                },
                               },
-                            }),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "bi bi-bookmark pe-1 pt-1",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "40",
-                              height: "40",
-                              fill: "currentColor",
-                              viewBox: "0 0 16 16",
-                              id: "iconoGuardarPlan",
-                            },
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d: "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z",
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z",
+                                  },
+                                }),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "bi bi-bookmark pe-1 pt-1 svgBookmark",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "40",
+                                  height: "40",
+                                  fill: "currentColor",
+                                  viewBox: "0 0 16 16",
+                                  id: "iconoGuardarPlan",
+                                },
                               },
-                            }),
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d: "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z",
+                                  },
+                                }),
+                              ]
+                            ),
                           ]
-                        ),
-                      ]
-                    ),
+                        )
+                      : _vm._e(),
                   ]
                 ),
               ]),

@@ -31,3 +31,6 @@ h1 {
     width: 200px;
     height: 200px;
 }
+#masAlava {display: none;}
+#masBizkaia {display: none;}
+#masGipuzkoa {display: none;}

@@ -22,7 +22,7 @@
               >
                 {{ item.documentName }}
               </h3>
-              <div class="container d-flex justify-content-end">
+              <div class="container d-flex justify-content-end" v-if="userId != undefined">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="50"
@@ -41,7 +41,7 @@
                   width="40"
                   height="40"
                   fill="currentColor"
-                  class="bi bi-bookmark pe-1 pt-1"
+                  class="bi bi-bookmark pe-1 pt-1 svgBookmark"
                   viewBox="0 0 16 16"
                   id="iconoGuardarPlan"
                 >
@@ -275,7 +275,7 @@ export default {
     );
 
     //Control de no haber iniciado sesion
-    if (this.userId != undefined && this.userId != NaN) {
+    if (this.userId != undefined && this.userId != NaN && this.userId != null) {
       //Marcar los favoritos del usuario
       $.ajax({
         type: "get",
@@ -315,6 +315,36 @@ export default {
           $(".svgCorazon").css("fill", "white");
         }
       });
+
+      $.ajax({
+                                type: 'get',
+                                url: '/busqueda/selectPlanesPlanificacion/'+este.userId,
+                                data: {},
+                                error: function(ts) { console.log(ts.responseText) }
+                            }).done(function(respuesta) {
+                                var resultadoDocumentName= [];
+                                for(var i=0; i<respuesta.length;i++){
+                                    resultadoDocumentName.push(respuesta[i].DocumentName);
+                                };
+                              
+                                 
+                                     if (
+                                        resultadoDocumentName.indexOf(este.resultado[0].documentName) >= 0
+                                      ) {
+                                        $('.svgBookmark').removeClass("bi-bookmark");
+                                        $('.svgBookmark').addClass("bi-bookmark-check-fill");
+                                        $('.svgBookmark').children('path').attr('d', 'M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z');
+                                        $('.svgBookmark').children('path').attr('fill-rule','evenodd');
+                                        $('.svgBookmark').css('fill', '#d850fc');
+                                    }else{
+                                        $('.svgBookmark').removeClass("bi-bookmark-check-fill");
+                                        $('.svgBookmark').addClass("bi-bookmark");
+                                        $('.svgBookmark').children('path').attr('d', 'M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z');
+                                        $('.svgBookmark').children('path').removeAttr('fill-rule');
+                                        $('.svgBookmark').css('fill', 'white');
+                                    }
+                                });
+                          
     }
     //Obtener los campos que cumple el plan
     if (

@@ -28,12 +28,18 @@ class PlanesController extends Controller
     {
         return view('busqueda')->with('id', $id);
     }
+
+    public function plan($id, $nombre)
+    {
+        return view('busqueda')->with('id', $id)->with('nombre',$nombre);
+    }
     //Funcion que hace una insercion en la tabla planes y otra en favoritoss. Esta funcion esta hecha para que un plan se inserte en favoritos
     public function insertarFavoritos( $id, $documentname, $territory)
     {
         DB::insert('insert into planes (DocumentName, Provincia) values (?, ?) ON DUPLICATE KEY UPDATE DocumentName=DocumentName', [$documentname, $territory]);
         DB::insert('insert into favoritos (id, DocumentName) values (?, ?) ON DUPLICATE KEY UPDATE DocumentName=DocumentName', [$id, $documentname]);
     }
+
     //Funcion que elimina un registro de favoritos
     public function borrarFavoritos($id, $documentname)
     {
@@ -43,6 +49,28 @@ class PlanesController extends Controller
     public function selectFavoritos($id)
     {
         $results = DB::select('select DocumentName from favoritos where id = ?',[$id]);
+        return $results;
+    }
+
+    public function insertarPlanificacion( $id, $nombre, $descripcion)
+    {
+        DB::insert('insert into planificacion (id, NombrePlanificacion, Descripcion) values (?, ?, ?) ON DUPLICATE KEY UPDATE NombrePlanificacion=NombrePlanificacion', [$id, $nombre, $descripcion]);
+    }
+    public function selectPlanificaciones($id)
+    {
+        $results = DB::select('select * from planificacion where id = ?',[$id]);
+        return $results;
+    }
+
+    public function insertarPlanPlanificacion( $idPlanificacion, $nombrePlan,)
+    {
+        DB::insert('insert into planes (DocumentName, Provincia) values (?, ?) ON DUPLICATE KEY UPDATE DocumentName=DocumentName', [$nombrePlan, 'undefined']);
+        DB::insert('insert into agrupa (IdPlanificacion, DocumentName) values (?, ?) ON DUPLICATE KEY UPDATE DocumentName=DocumentName', [$idPlanificacion, $nombrePlan]);
+    }
+
+    public function selectPlanesPlanificacion( $id)
+    {
+        $results = DB::select('select DocumentName from agrupa, planificacion where agrupa.IdPlanificacion=planificacion.IdPlanificacion and id = ? Group by DocumentName',[$id]);
         return $results;
     }
 
