@@ -83,7 +83,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -93,9 +94,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $requestData = $request->all();
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            if($foto->isValid()){
+                $extension = $foto->extension();
+                $nombreFichero = $user->id.'.'.$extension;
+                copy($foto->getRealPath(), public_path("images\\Usuarios").'\\'.$nombreFichero);
+                $requestData['foto'] = $nombreFichero;
+            }
+        }
+
+        $user->update($requestData);
+        $mensaje = 'El usuario '.$user->name.' ha sido modificado correctamente.';
+        
+        return view('user.datosUsuario', compact('user','mensaje'));
     }
 
     /**
