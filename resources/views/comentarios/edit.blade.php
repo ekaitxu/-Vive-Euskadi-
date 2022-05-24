@@ -18,7 +18,7 @@
                    <form method="POST" action="{{ route('comentarios.update', $comentario->IdComentario) }}"  role="form" enctype="multipart/form-data">
                     {{ method_field('PATCH') }}
                     @csrf
-                    <textarea  class="mx-5 mt-3" name="Texto" id="" cols="120" rows="10">{{ $comentario->Texto }}</textarea>
+                    <textarea  class="mx-5 mt-3" name="Texto" id="" cols="80" rows="10">{{ $comentario->Texto }}</textarea>
 
                     <div class="d-md-flex justify-content-md-center align-items-md-center mb-3 mt-4">
                         <button type="submit" class="btn btn-primary">Guardar</button>
