@@ -9,8 +9,7 @@
         <div class="col">
             <form class="mt-4" method="POST" action="{{route('user.comentarioUpdate', $comentario->IdComentario)}}">
             @csrf
-            @method('PUT')
-            {{print($comentario->IdComentario)}}            
+            @method('PUT')           
                 <div class="row">
                     <div class="form-group">
                         <input type="text" class="form-group form-control-lg w-100" placeholder="Texto del comentario" id="texto" name="texto" value="{{$comentario->Texto}}">
