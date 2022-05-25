@@ -34,9 +34,9 @@
                     </div>
                     <div id="datosAdmin" class="w-100">
                         @if(Auth::user()->foto)
-                            <img src="/images/Usuarios/{{ Auth::user()->foto }}" style="width: 100px; height: 100px;" alt="">
+                            <img class="rounded-circle" src="/images/Usuarios/{{ Auth::user()->foto }}" style="width: 100px; height: 100px;" alt="">
                         @else
-                            <img src="../../images/login1.png"style="width: 100px; height: 100px;"/>
+                            <img class="rounded-circle" src="../../images/login1.png"style="width: 100px; height: 100px;"/>
                         @endif
                         <h3>{{ Auth::user()->name }}</h3>
                         <h5>{{Auth::user()->email }}</h5>

@@ -25,15 +25,14 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('user.update', $user->id) }}" role="form" enctype="multipart/form-data">
                     {{ method_field('PATCH') }}
-                    @csrf
-
+                    @csrf  
                 <div class="image-upload">
                     <label for="file-input">
-                        @if($user->foto)
-                            <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
-                        @else
-                            <img src="../../images/login1.png"style="width: 100px; height: 100px;"/>
-                        @endif
+                            @if($user->foto)
+                                <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" class="rounded-circle" alt="">
+                            @else
+                                <img src="../../images/login1.png"style="width: 100px; height: 100px;" class="rounded-circle"/>
+                            @endif
                         
                     </label>
 

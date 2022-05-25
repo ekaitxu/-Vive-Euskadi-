@@ -22,9 +22,9 @@
                     <div class="image-upload">
                         <label for="file-input">
                             @if($user->foto)
-                                <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" alt="">
+                                <img src="/images/Usuarios/{{ $user->foto }}" style="width: 100px; height: 100px;" class="rounded-circle" alt="">
                             @else
-                                <img src="../../images/login1.png"style="width: 100px; height: 100px;"/>
+                                <img src="../../images/login1.png"style="width: 100px; height: 100px;" class="rounded-circle"/>
                             @endif
                             
                         </label>
