@@ -51,7 +51,7 @@ class PlanificacionController extends Controller
     {
         $planificaciones=DB::select('SELECT * FROM planificacion WHERE id = ?', [Auth::user()->id]);
         $planes=DB::select('SELECT * FROM agrupa WHERE IdPlanificacion = ?', [$id]);
-        return view('user.planesUsuario', ['planes' => $planes,'planificaciones'=>$planificaciones]);
+        return view('user.planesUsuario', ['planes' => $planes,'planificaciones'=>$planificaciones, 'id_planificacion'=>$id]);
     }
 
     /**
